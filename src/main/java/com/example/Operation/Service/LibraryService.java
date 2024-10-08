@@ -5,6 +5,7 @@ import com.example.Operation.Entity.Library;
 import com.example.Operation.Excpection.ResourceNotFoundException;
 import com.example.Operation.Payload.LibraryDto;
 import com.example.Operation.repo.LibraryRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
@@ -18,9 +19,9 @@ public class LibraryService {
     private final LibraryRepository repository;
     private final ModelMapper mapper;
 
+    @Transactional
     public LibraryDto createReg( LibraryDto library){
         Library libraryEntity = mapToEntiy(library);
-
         if (libraryEntity.getBookList() != null) {
             libraryEntity.getBookList().forEach(book -> book.setLibrary(libraryEntity));
         }

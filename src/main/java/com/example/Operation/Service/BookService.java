@@ -6,6 +6,7 @@ import com.example.Operation.Payload.BookDto;
 import com.example.Operation.Payload.LibraryDto;
 import com.example.Operation.Payload.dtoBook;
 import com.example.Operation.repo.BookRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class BookService {
 
     private final BookRepository repository;
     private final ModelMapper mapper;
-
+    @Transactional
     public dtoBook crearteReg(dtoBook book) {
         Book save = repository.save(mapToEntity(book));
         dtoBook dtoBook = mapToDto(save);
